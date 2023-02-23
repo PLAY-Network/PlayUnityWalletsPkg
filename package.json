@@ -23,7 +23,17 @@
     "/package.json",
     "/package.json.meta",
     "/ReadyGamesNetwork",
-    "/ReadyGamesNetwork.meta"
+    "/ReadyGamesNetwork.meta",
+    "/Samples",
+    "/Samples.meta",
+    "/Samples~"
+  ],
+  "samples": [
+    {
+      "displayName": "Wallets Retrieve Create Example",
+      "description": "Contains prefab and scene with example code to get user wallets and create new wallet",
+      "path": "Samples~/WalletsExample"
+    }
   ],
   "dependencies": {
     "io.getready.rgn.core": "0.1.0"
