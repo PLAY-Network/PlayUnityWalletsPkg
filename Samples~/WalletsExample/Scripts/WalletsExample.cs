@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using RGN.Impl.Firebase;
 using RGN.Modules.Wallets;
+using RGN.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,15 @@ namespace RGN.Samples
 {
     internal sealed class WalletsExample : IInitializable, System.IDisposable
     {
+        [Header("Internal references")]
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _createWalletButton;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private RectTransform _scrollContentRectTrasform;
         [SerializeField] private CreateWalletDialog _createWalletDialog;
+        [SerializeField] private LoadingIndicator _loadingIndicator;
 
+        [Header("Prefabs")]
         [SerializeField] private WalletItem _walletItemPrefab;
 
         private List<WalletItem> _walletItems;
@@ -36,11 +40,12 @@ namespace RGN.Samples
         internal void SetUIInteractable(bool interactable)
         {
             _canvasGroup.interactable = interactable;
+            _loadingIndicator.SetEnabled(!interactable);
         }
         internal async Task ReloadWalletItemsAsync()
         {
             DisposeWalletItems();
-            _canvasGroup.interactable = false;
+            SetUIInteractable(false);
             var walletsData = await WalletsModule.I.GetUserWalletsAsync();
             var wallets = walletsData.wallets;
             _walletItems = new List<WalletItem>(wallets.Length);
@@ -50,7 +55,7 @@ namespace RGN.Samples
                 walletItem.Init(i, wallets[i]);
                 _walletItems.Add(walletItem);
             }
-            _canvasGroup.interactable = true;
+            SetUIInteractable(true);
         }
 
         private void OnCreateButtonClick()

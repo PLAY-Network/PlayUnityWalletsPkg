@@ -16,7 +16,10 @@ namespace RGN.Samples
         }
         public void Dispose()
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
