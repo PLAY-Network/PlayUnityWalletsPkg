@@ -1,4 +1,5 @@
 using RGN.Modules.Wallets;
+using RGN.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,11 +41,17 @@ namespace RGN.Samples
                 var result = await WalletsModule.I.CreateWalletAsync(_passwordInputField.text);
                 if (!result.wallet_created || !result.success)
                 {
+                    ToastMessage.I.ShowError(result.error);
                     Debug.LogError(result.error);
                     return;
                 }
                 SetVisible(false);
                 await _walletsExample.ReloadWalletItemsAsync();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+                ToastMessage.I.ShowError(ex.Message);
             }
             finally
             {

@@ -954,7 +954,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 8854970241158519061}
-  - {fileID: 5167774944214897606}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1193,6 +1192,7 @@ RectTransform:
   - {fileID: 2151887190226196810}
   - {fileID: 1638757739373348521}
   - {fileID: 1100101974328255855}
+  - {fileID: 5167774944214897606}
   m_Father: {fileID: 8854970239987664120}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1425,11 +1425,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 8854970239987664120}
+    m_TransformParent: {fileID: 8854970241158519061}
     m_Modifications:
     - target: {fileID: 6255833158276923820, guid: 9c76fa6872af1f3439cf0e671d6fc217, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6255833158276923820, guid: 9c76fa6872af1f3439cf0e671d6fc217, type: 3}
       propertyPath: m_LocalPosition.x
