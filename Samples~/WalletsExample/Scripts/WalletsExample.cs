@@ -12,7 +12,6 @@ namespace RGN.Samples
     public sealed class WalletsExample : IUIScreen, System.IDisposable
     {
         [Header("Internal references")]
-        [SerializeField] private Button _backButton;
         [SerializeField] private Button _createWalletButton;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private RectTransform _scrollContentRectTrasform;
@@ -28,25 +27,18 @@ namespace RGN.Samples
         {
             base.InitAsync(rgnFrame);
             _createWalletDialog.Init(this);
-            _backButton.gameObject.SetActive(false);
-            _backButton.onClick.AddListener(OnBackButtonClick);
             _createWalletButton.onClick.AddListener(OnCreateButtonClick);
+            _createWalletButton.gameObject.SetActive(false);
             RGNCore.I.AuthenticationChanged += OnAuthenticationChangedAsync;
             return ReloadWalletItemsAsync();
         }
         protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
             _createWalletDialog.Dispose();
-            _backButton.onClick.RemoveListener(OnBackButtonClick);
             _createWalletButton.onClick.RemoveListener(OnCreateButtonClick);
             RGNCore.I.AuthenticationChanged -= OnAuthenticationChangedAsync;
             DisposeWalletItems();
-        }
-
-        public override void SetVisible(bool visible)
-        {
-            base.SetVisible(visible);
-            _backButton.gameObject.SetActive(true);
         }
 
         internal void SetUIInteractable(bool interactable)
@@ -68,6 +60,7 @@ namespace RGN.Samples
                 _walletItems.Add(walletItem);
             }
             SetUIInteractable(true);
+            _createWalletButton.gameObject.SetActive(wallets.Length == 0);
         }
         private void OnCreateButtonClick()
         {
