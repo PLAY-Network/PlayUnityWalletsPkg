@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RGN.Impl.Firebase;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 namespace RGN.Samples
 {
-    internal sealed class WalletsExample : IInitializable, System.IDisposable
+    public sealed class WalletsExample : IUIScreen, System.IDisposable
     {
         [Header("Internal references")]
         [SerializeField] private Button _backButton;
@@ -23,18 +24,29 @@ namespace RGN.Samples
 
         private List<WalletItem> _walletItems;
 
-        public override Task InitAsync()
+        public override Task InitAsync(IRGNFrame rgnFrame)
         {
+            base.InitAsync(rgnFrame);
             _createWalletDialog.Init(this);
             _backButton.gameObject.SetActive(false);
+            _backButton.onClick.AddListener(OnBackButtonClick);
             _createWalletButton.onClick.AddListener(OnCreateButtonClick);
+            RGNCore.I.AuthenticationChanged += OnAuthenticationChangedAsync;
             return ReloadWalletItemsAsync();
         }
         protected override void Dispose(bool disposing)
         {
             _createWalletDialog.Dispose();
+            _backButton.onClick.RemoveListener(OnBackButtonClick);
             _createWalletButton.onClick.RemoveListener(OnCreateButtonClick);
+            RGNCore.I.AuthenticationChanged -= OnAuthenticationChangedAsync;
             DisposeWalletItems();
+        }
+
+        public override void SetVisible(bool visible)
+        {
+            base.SetVisible(visible);
+            _backButton.gameObject.SetActive(true);
         }
 
         internal void SetUIInteractable(bool interactable)
@@ -57,7 +69,6 @@ namespace RGN.Samples
             }
             SetUIInteractable(true);
         }
-
         private void OnCreateButtonClick()
         {
             _createWalletDialog.SetVisible(true);
@@ -73,6 +84,13 @@ namespace RGN.Samples
                 _walletItems[i].Dispose();
             }
             _walletItems.Clear();
+        }
+        private async void OnAuthenticationChangedAsync(EnumLoginState state, EnumLoginError error)
+        {
+            if (state == EnumLoginState.Success && RGNCore.I.AuthorizedProviders == EnumAuthProvider.Email)
+            {
+                await ReloadWalletItemsAsync();
+            }
         }
     }
 }
