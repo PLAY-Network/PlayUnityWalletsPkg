@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RGN.Impl.Firebase;
@@ -23,13 +22,17 @@ namespace RGN.Samples
 
         private List<WalletItem> _walletItems;
 
-        public override Task InitAsync(IRGNFrame rgnFrame)
+        public override void PreInit(IRGNFrame rgnFrame)
         {
-            base.InitAsync(rgnFrame);
+            base.PreInit(rgnFrame);
             _createWalletDialog.Init(this);
             _createWalletButton.onClick.AddListener(OnCreateButtonClick);
             _createWalletButton.gameObject.SetActive(false);
             RGNCore.I.AuthenticationChanged += OnAuthenticationChangedAsync;
+        }
+        public override Task InitAsync()
+        {
+            base.InitAsync();
             return ReloadWalletItemsAsync();
         }
         protected override void Dispose(bool disposing)
@@ -41,6 +44,15 @@ namespace RGN.Samples
             DisposeWalletItems();
         }
 
+        public async Task<string> GetPrimaryWalletAddressAsync()
+        {
+            var walletsData = await WalletsModule.I.GetUserWalletsAsync();
+            if (walletsData.wallets.Length == 0)
+            {
+                return "Create Primary Wallet";
+            }
+            return walletsData.wallets[0].address;
+        }
         internal void SetUIInteractable(bool interactable)
         {
             _canvasGroup.interactable = interactable;
@@ -72,7 +84,7 @@ namespace RGN.Samples
             {
                 return;
             }
-            for (int i =0; i < _walletItems.Count; ++i)
+            for (int i = 0; i < _walletItems.Count; ++i)
             {
                 _walletItems[i].Dispose();
             }
