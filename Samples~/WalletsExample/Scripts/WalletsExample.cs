@@ -28,12 +28,8 @@ namespace RGN.Samples
             _createWalletDialog.Init(this);
             _createWalletButton.onClick.AddListener(OnCreateButtonClick);
             _createWalletButton.gameObject.SetActive(false);
+            _walletItems = new List<WalletItem>();
             RGNCore.I.AuthenticationChanged += OnAuthenticationChangedAsync;
-        }
-        public override Task InitAsync()
-        {
-            base.InitAsync();
-            return ReloadWalletItemsAsync();
         }
         protected override void Dispose(bool disposing)
         {
@@ -64,13 +60,14 @@ namespace RGN.Samples
             SetUIInteractable(false);
             var walletsData = await WalletsModule.I.GetUserWalletsAsync();
             var wallets = walletsData.wallets;
-            _walletItems = new List<WalletItem>(wallets.Length);
             for (int i = 0; i < wallets.Length; ++i)
             {
                 WalletItem walletItem = Instantiate(_walletItemPrefab, _scrollContentRectTrasform);
                 walletItem.Init(i, wallets[i]);
                 _walletItems.Add(walletItem);
             }
+            Vector2 sizeDelta = _scrollContentRectTrasform.sizeDelta;
+            _scrollContentRectTrasform.sizeDelta = new Vector2(sizeDelta.x, wallets.Length * _walletItemPrefab.GetHeight());
             SetUIInteractable(true);
             _createWalletButton.gameObject.SetActive(wallets.Length == 0);
         }

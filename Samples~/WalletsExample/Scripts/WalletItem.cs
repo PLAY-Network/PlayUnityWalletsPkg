@@ -9,17 +9,29 @@ namespace RGN.Samples
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TextMeshProUGUI _addressText;
 
+        private bool _disposed = false;
+
         internal void Init(int index, RGNWallet wallet)
         {
-            _rectTransform.localPosition = new Vector3(0, index * _rectTransform.sizeDelta.y, 0);
+            _rectTransform.localPosition = new Vector3(0, -index * GetHeight(), 0);
             _addressText.text = wallet.address;
         }
         public void Dispose()
         {
-            if (gameObject != null)
+            if (_disposed)
             {
-                Destroy(gameObject);
+                return;
             }
+            Destroy(gameObject);
+        }
+        private void OnDestroy()
+        {
+            _disposed = true;
+        }
+
+        internal float GetHeight()
+        {
+            return _rectTransform.sizeDelta.y;
         }
     }
 }
