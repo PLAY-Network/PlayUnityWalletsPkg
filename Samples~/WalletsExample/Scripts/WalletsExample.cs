@@ -49,6 +49,11 @@ namespace RGN.Samples
             }
             return walletsData.wallets[0].address;
         }
+        public async Task<bool> DoesTheUserHasPrimaryWalletAddressAsync()
+        {
+            var response = await WalletsModule.I.IsUserHavePrimaryWalletAsync();
+            return response.isUserHavePrimaryWallet;
+        }
         internal void SetUIInteractable(bool interactable)
         {
             _canvasGroup.interactable = interactable;
@@ -89,7 +94,7 @@ namespace RGN.Samples
         }
         private async void OnAuthenticationChangedAsync(EnumLoginState state, EnumLoginError error)
         {
-            if (state == EnumLoginState.Success && RGNCore.I.AuthorizedProviders == EnumAuthProvider.Email)
+            if (state == EnumLoginState.Success)
             {
                 await ReloadWalletItemsAsync();
             }
