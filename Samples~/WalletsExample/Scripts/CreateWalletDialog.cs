@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using RGN.Modules.Wallets;
 using RGN.UI;
 using TMPro;
@@ -11,6 +12,7 @@ namespace RGN.Samples
         [SerializeField] private Button _createWalletButton;
         [SerializeField] private Button _closeDialogAreaButton;
         [SerializeField] private TMP_InputField _passwordInputField;
+        [SerializeField] private TMP_InputField _confirmPasswordInputField;
 
         private WalletsExample _walletsExample;
 
@@ -30,11 +32,27 @@ namespace RGN.Samples
         internal void SetVisible(bool visible)
         {
             _passwordInputField.text = string.Empty;
+            _confirmPasswordInputField.text = string.Empty;
             gameObject.SetActive(visible);
         }
 
         private async void OnCreateWalletButtonClickAsync()
         {
+            if (string.IsNullOrWhiteSpace(_passwordInputField.text))
+            {
+                ToastMessage.I.ShowError("The password can not be empty");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(_confirmPasswordInputField.text))
+            {
+                ToastMessage.I.ShowError("Please confirm the password");
+                return;
+            }
+            if (_passwordInputField.text != _confirmPasswordInputField.text)
+            {
+                ToastMessage.I.ShowError("The passwords do not match");
+                return;
+            }
             _walletsExample.SetUIInteractable(false);
             try
             {
