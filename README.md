@@ -1,2 +1,2 @@
 # RGN Wallets
-Package version: 0.3.0-dev.237
+Package version: 0.3.0
