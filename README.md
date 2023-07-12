@@ -1,2 +1,2 @@
 # RGN Wallets
-Package version: 0.6.0-dev.279
+Package version: 0.6.0-dev.280
