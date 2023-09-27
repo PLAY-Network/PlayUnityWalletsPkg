@@ -92,9 +92,9 @@ namespace RGN.Samples
             }
             _walletItems.Clear();
         }
-        private async void OnAuthenticationChangedAsync(EnumLoginState state, EnumLoginError error)
+        private async void OnAuthenticationChangedAsync(AuthState authState)
         {
-            if (state == EnumLoginState.Success)
+            if (authState.LoginState == EnumLoginState.Success)
             {
                 await ReloadWalletItemsAsync();
             }
