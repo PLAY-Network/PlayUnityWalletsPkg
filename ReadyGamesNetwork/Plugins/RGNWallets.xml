@@ -10,6 +10,11 @@
             User wallet is required to purchase NFT items
             </summary>
         </member>
+        <member name="M:RGN.Modules.Wallets.WalletsModule.CreateWallet(RGN.Modules.Wallets.RGNWalletCreateCallbackDelegate)">
+            <summary>
+            Initiates a wallet creation process using web form
+            </summary>
+        </member>
         <member name="M:RGN.Modules.Wallets.WalletsModule.IsUserHavePrimaryWalletAsync">
             <summary>
             Checks if the user already created primary wallet
