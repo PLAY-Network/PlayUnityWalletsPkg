@@ -10,26 +10,10 @@
             User wallet is required to purchase NFT items
             </summary>
         </member>
-        <member name="M:RGN.Modules.Wallets.WalletsModule.IsUserHavePrimaryWalletAsync">
+        <member name="M:RGN.Modules.Wallets.WalletsModule.CreateWallet(RGN.Modules.Wallets.RGNWalletCreateCallbackDelegate)">
             <summary>
-            Checks if the user already created primary wallet
-            The primary wallet is needed for NFT virtual items purchase
+            Initiates a wallet creation process using web form
             </summary>
-            <returns>true if the primary wallet exists, otherwise false</returns>
-        </member>
-        <member name="M:RGN.Modules.Wallets.WalletsModule.GetUserWalletsAsync">
-            <summary>
-            Returns all user wallets
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:RGN.Modules.Wallets.WalletsModule.CreateWalletAsync(System.String)">
-            <summary>
-            Creates user wallet. Right now it is possible to create just one wallet per user
-            </summary>
-            <param name="password">Password for the wallet</param>
-            <returns>Information of the create operation was successful.</returns>
-            <exception cref="T:System.ArgumentException"></exception>
         </member>
     </members>
 </doc>
