@@ -40,7 +40,7 @@ namespace RGN.Samples
             DisposeWalletItems();
         }
 
-        public async Task<string> GetPrimaryWalletAddressAsync()
+        public Task<string> GetPrimaryWalletAddressAsync()
         {
             //var walletsData = await WalletsModule.I.GetUserWalletsAsync();
             //if (walletsData.wallets.Length == 0)
@@ -48,20 +48,20 @@ namespace RGN.Samples
             //    return "Create Primary Wallet";
             //}
             //return walletsData.wallets[0].address;
-            return "Not implemented";
+            return Task.FromResult("Not implemented");
         }
-        public async Task<bool> DoesTheUserHasPrimaryWalletAddressAsync()
+        public Task<bool> DoesTheUserHasPrimaryWalletAddressAsync()
         {
             //var response = await WalletsModule.I.IsUserHavePrimaryWalletAsync();
             //return response.isUserHavePrimaryWallet;
-            return false;
+            return Task.FromResult(false);
         }
         internal void SetUIInteractable(bool interactable)
         {
             _canvasGroup.interactable = interactable;
             _loadingIndicator.SetEnabled(!interactable);
         }
-        internal async Task ReloadWalletItemsAsync()
+        internal Task ReloadWalletItemsAsync()
         {
             //DisposeWalletItems();
             //SetUIInteractable(false);
@@ -77,6 +77,7 @@ namespace RGN.Samples
             //_scrollContentRectTrasform.sizeDelta = new Vector2(sizeDelta.x, wallets.Length * _walletItemPrefab.GetHeight());
             //SetUIInteractable(true);
             //_createWalletButton.gameObject.SetActive(wallets.Length == 0);
+            return Task.CompletedTask;
         }
         private void OnCreateButtonClick()
         {

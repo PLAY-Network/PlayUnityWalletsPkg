@@ -36,7 +36,7 @@ namespace RGN.Samples
             gameObject.SetActive(visible);
         }
 
-        private async void OnCreateWalletButtonClickAsync()
+        private void OnCreateWalletButtonClickAsync()
         {
             if (string.IsNullOrWhiteSpace(_passwordInputField.text))
             {
