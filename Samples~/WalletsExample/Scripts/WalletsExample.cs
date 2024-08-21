@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RGN.Impl.Firebase;
@@ -27,7 +28,8 @@ namespace RGN.Samples
             base.PreInit(rgnFrame);
             _createWalletDialog.Init(this);
             _createWalletButton.onClick.AddListener(OnCreateButtonClick);
-            _createWalletButton.gameObject.SetActive(false);
+            _createWalletButton.gameObject.SetActive(true);
+            _loadingIndicator.SetEnabled(false);
             _walletItems = new List<WalletItem>();
             RGNCore.I.AuthenticationChanged += OnAuthenticationChangedAsync;
         }
@@ -81,8 +83,16 @@ namespace RGN.Samples
         }
         private void OnCreateButtonClick()
         {
-            _createWalletDialog.SetVisible(true);
+            SetUIInteractable(false);
+            WalletsModule.I.CreateWallet(OnCreateWalletCallback);
         }
+        private void OnCreateWalletCallback(bool success)
+        {
+            Debug.Log("Create wallet callback success: " + success);
+            SetUIInteractable(true);
+            ToastMessage.I.ShowSuccess("Wallet successfully created!");
+        }
+
         private void DisposeWalletItems()
         {
             if (_walletItems == null)

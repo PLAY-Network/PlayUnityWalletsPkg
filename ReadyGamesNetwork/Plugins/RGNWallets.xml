@@ -10,6 +10,13 @@
             User wallet is required to purchase NFT items
             </summary>
         </member>
+        <member name="M:RGN.Modules.Wallets.WalletsModule.IsUserHasBlockchainRequirementAsync(System.Threading.CancellationToken)">
+            <summary>
+            Checks if the user has a blockchain requirement
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
+        </member>
         <member name="M:RGN.Modules.Wallets.WalletsModule.CreateWallet(RGN.Modules.Wallets.RGNWalletCreateCallbackDelegate)">
             <summary>
             Initiates a wallet creation process using web form
