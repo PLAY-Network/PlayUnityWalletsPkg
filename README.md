@@ -1,2 +1,2 @@
 # RGN Wallets
-Package version: 0.13.0-dev.584
+Package version: 0.13.0-dev.586
