@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PlaySDKWallets</name>
+    </assembly>
+    <members>
+        <member name="T:RGN.Modules.Wallets.WalletsModule">
+            <summary>
+            This module is responsible for user wallet operations.
+            User wallet is required to purchase NFT items
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Wallets.WalletsModule.IsUserHasBlockchainRequirementAsync(System.Threading.CancellationToken)">
+            <summary>
+            Checks if the user has a blockchain requirement
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Wallets.WalletsModule.CreateWallet(RGN.Modules.Wallets.RGNWalletCreateCallbackDelegate)">
+            <summary>
+            Initiates a wallet creation process using web form
+            </summary>
+        </member>
+    </members>
+</doc>
