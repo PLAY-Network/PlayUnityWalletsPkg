@@ -1,5 +1,5 @@
 ﻿{
-  "name": "io.play.unity.wallets",
+  "name": "network.theplay.unity.wallets",
   "displayName": "PLAY SDK. Wallets",
   "version": "0.16.0",
   "unity": "2020.3",
@@ -36,6 +36,6 @@
     }
   ],
   "dependencies": {
-    "io.play.unity.core": "0.16.0"
+    "network.theplay.unity.core": "0.16.0"
   }
 }
